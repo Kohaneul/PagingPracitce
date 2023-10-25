@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th = "http://www.thymeleaf.org">
+<title>전체 조회</title>
+
+<head>
+    <meta charset = "utf-8"/>
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge"/>
+    <meta name = "viewport" content = "width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name = "description" content = ""/>
+    <meta name = "author" content = ""/>
+    <title>Register - SB Admin</title>
+</head>
+<link href = "https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel = "stylesheet"/>
+<link href = "css/styles.css" rel = "stylesheet"/>
+<script src = "https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin = "anonymous"></script>
+
+<script th:inline = "javascript">
+    /*<![CDATA[*/
+
+    /*]]>*/
+    </script>
+</head>
+<div>
+    <table id = "datatablesSimple">
+        <thead>
+        <tr>
+            <th>no</th>
+            <th>아이디</th>
+        </tr>
+        </thead>
+        <tfoot>
+        </tfoot>
+        <tbody>
+        <div th:if = "${members.size()>0}">
+            <tr th:each = "members,i :${members}">
+                <td th:text = "${members.rownum}"></td>
+                <td th:text = "${members.loginId}"></td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+    <div id="pagination">
+        <!-- 맨 처음 페이지로 이동하는 버튼 -->
+        <span th:if="${pn.startPage > 1}">
+        <a th:href="@{'/member?page=1'}" th:text="'처음&emsp;'"></a>
+    </span>
+
+        <!-- 이전 블록으로 이동하는 버튼 -->
+        <span th:if="${pn.isPrev == true}">
+    	<a th:href="@{'/member?page='+${pn.startPage - 1}}" th:text="'이전'"></a>
+    </span>
+
+        <!-- 시퀀스 보여주는 값을 변경. -->
+        <span th:each="p : ${#numbers.sequence(pn.startPage, pn.endPage)}">
+        <a class="div2" th:href="@{'/member?page='+${p}}" th:text="|&emsp;${p}&emsp;|"></a>
+    </span>
+
+        <!-- 다음 블록으로 이동하는 버튼 -->
+        <span th:if="${pn.isNext == true}">
+	<a th:href="@{'/member?page='+|${pn.endPage + 1}|}" th:text="'다음'"></a>
+    </span>
+
+        <!-- 맨 뒷 페이지로 이동하는 버튼 -->
+        <span th:if="${pn.endPage < pn.totalPage}">
+	<a th:href="@{'/member?page='+${pn.totalPage}}" th:text="|&emsp;끝|"></a>
+    </span>
+    </div>
+
+</div>
+<script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin = "anonymous"></script>
+<script src = "js/scripts.js"></script>
+</body>
+</html>
