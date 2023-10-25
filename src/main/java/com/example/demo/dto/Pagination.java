@@ -27,17 +27,16 @@ public class Pagination {
         setTotalPage(totalCount);
         setStartPage(this.startPage,currentPage,pageSize);
         setEndPage(this.startPage,this.pageSize,this.totalPage);
-        setPrev(this.endPage,this.totalPage);
+        setPrev(this.startPage,this.pageSize);
         setNext(endPage,totalPage);
         setOffSet(currentPage,recordSize);
     }
     public void setTotalPage(int totalCount){
         this.totalPage = (int)Math.ceil(totalCount*1.0/recordSize);
     }
-    public void setStartPage(int startPage, int currentPage,int pageSize){
-        //현재 3페이지일때 첫페이지를 구해라
-        //
-        this.startPage = startPage + currentPage/pageSize;
+    public void setStartPage(final int startPage,int currentPage,int pageSize){
+        //10페이지
+        this.startPage = startPage + (((currentPage-startPage) / pageSize) * pageSize);
 
     }
     public void setEndPage(int startPage, int pageSize, int totalPage){

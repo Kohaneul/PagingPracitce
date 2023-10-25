@@ -47,7 +47,7 @@
     </span>
 
         <!-- 이전 블록으로 이동하는 버튼 -->
-        <span th:if="${pn.isPrev == true}">
+        <span th:if="${pn.prev == true}">
     	<a th:href="@{'/member?page='+${pn.startPage - 1}}" th:text="'이전'"></a>
     </span>
 
@@ -57,7 +57,7 @@
     </span>
 
         <!-- 다음 블록으로 이동하는 버튼 -->
-        <span th:if="${pn.isNext == true}">
+        <span th:if="${pn.next == true}">
 	<a th:href="@{'/member?page='+|${pn.endPage + 1}|}" th:text="'다음'"></a>
     </span>
 
