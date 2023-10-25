@@ -10,7 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-    private int rownum;
-    private int id;
-    private String loginId;
+    private int rownum; //rownum
+    private int name;   //이름
+    private int id;     //pk값
+    private String loginId; //로그인 아이디
 }

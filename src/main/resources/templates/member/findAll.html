@@ -21,10 +21,12 @@
     </script>
 </head>
 <div>
+
     <table id = "datatablesSimple">
         <thead>
         <tr>
             <th>no</th>
+            <th>이름</th>
             <th>아이디</th>
         </tr>
         </thead>
@@ -34,6 +36,8 @@
         <div th:if = "${members.size()>0}">
             <tr th:each = "members,i :${members}">
                 <td th:text = "${members.rownum}"></td>
+                <td th:text = "${members.name}"></td>
+
                 <td th:text = "${members.loginId}"></td>
             </tr>
         </div>

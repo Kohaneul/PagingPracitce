@@ -22,12 +22,10 @@ public class MemberController {
     public String findAll(@RequestParam(value="page", defaultValue = "1")int currentPage, Model model){
 
         Pagination pageNation = new Pagination(memberService.count(),currentPage);
-        log.info("$$$$$$$$$$$$$$$$$page={}",pageNation);
         List<Member> members = memberService.findAll(pageNation);
         model.addAttribute("members",members);
         model.addAttribute("page",currentPage);
         model.addAttribute("pn",pageNation);
-
         return "member/findAll";
     }
 }

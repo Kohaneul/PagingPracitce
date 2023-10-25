@@ -4,22 +4,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
+//페이징처리 클래스
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class Pagination {
-    private int recordSize = 10;
-    private int pageSize = 5;
-    private int totalCount;
-    private int currentPage;
-    private int startPage = 1;
-    private int endPage;
-    private int totalPage;
-    private boolean prev = false;
-    private boolean next = false;
-    private int offset;
+    private int recordSize = 10;    //한 페이지당 데이터 갯수
+    private int pageSize = 5;       //페이지 사이즈
+    private int totalCount;         //전체 데이터 갯수
+    private int currentPage;        //현재 페이지
+    private int startPage = 1;      //시작 페이지
+    private int endPage;            //한 블럭 안에 끝 페이지
+    private int totalPage;          //전체 페이지
+    private boolean prev = false;   //이전 페이지 여부
+    private boolean next = false;   //다음 페이지 여부
+    private int offset;     //얼만큼 끊어서 가져올것인가
 
     public Pagination(final int totalCount, final int currentPage){
         this.totalCount = totalCount;
