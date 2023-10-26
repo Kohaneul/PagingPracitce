@@ -21,7 +21,11 @@
     </script>
 </head>
 <div>
-
+    <form th:object="${searchDTO}" class="form-inline" name="sendfrm" >
+        <input type="text" th:field="*{name}" placeholder="이름 입력"/>
+        <input type="text" th:field="*{loginId}" placeholder="로그인 아이디 입력"/>
+      <button type="submit" class="btn btn-primary mb-2">검색</button>
+    </form>
     <table id = "datatablesSimple">
         <thead>
         <tr>
@@ -47,27 +51,27 @@
     <div id="pagination">
         <!-- 맨 처음 페이지로 이동하는 버튼 -->
         <span th:if="${pn.startPage > 1}">
-        <a th:href="@{'/member?page=1'}" th:text="'처음&emsp;'"></a>
+        <a th:href="@{'/member?currentPage=1'}" th:text="'처음&emsp;'"></a>
     </span>
 
         <!-- 이전 블록으로 이동하는 버튼 -->
         <span th:if="${pn.prev == true}">
-    	<a th:href="@{'/member?page='+${pn.startPage - 1}}" th:text="'이전'"></a>
+    	<a th:href="@{'/member?currentPage='+${pn.startPage - 1}}" th:text="'이전'"></a>
     </span>
 
         <!-- 시퀀스 보여주는 값을 변경. -->
         <span th:each="p : ${#numbers.sequence(pn.startPage, pn.endPage)}">
-        <a class="div2" th:href="@{'/member?page='+${p}}" th:text="|&emsp;${p}&emsp;|"></a>
+        <a class="div2" th:href="@{'/member?currentPage='+${p}}" th:text="|&emsp;${p}&emsp;|"></a>
     </span>
 
         <!-- 다음 블록으로 이동하는 버튼 -->
         <span th:if="${pn.next == true}">
-	<a th:href="@{'/member?page='+|${pn.endPage + 1}|}" th:text="'다음'"></a>
+	<a th:href="@{'/member?currentPage='+|${pn.endPage + 1}|}" th:text="'다음'"></a>
     </span>
 
         <!-- 맨 뒷 페이지로 이동하는 버튼 -->
         <span th:if="${pn.endPage < pn.totalPage}">
-	<a th:href="@{'/member?page='+${pn.totalPage}}" th:text="|&emsp;끝|"></a>
+	<a th:href="@{'/member?currentPage='+${pn.totalPage}}" th:text="|&emsp;끝|"></a>
     </span>
     </div>
 
