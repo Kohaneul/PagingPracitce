@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Member {
-    private int rownum; //rownum
-    private String name;   //이름
-    private int id;     //pk값
-    private String loginId; //로그인 아이디
-
+    private Long rownum;
+    private Long id;
+    private String name;
+    private String loginId;
 }

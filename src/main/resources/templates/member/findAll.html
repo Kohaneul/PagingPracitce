@@ -14,11 +14,6 @@
 <link href = "css/styles.css" rel = "stylesheet"/>
 <script src = "https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin = "anonymous"></script>
 
-<script th:inline = "javascript">
-    /*<![CDATA[*/
-
-    /*]]>*/
-    </script>
 </head>
 <div>
     <form th:object="${searchDTO}" class="form-inline" name="sendfrm" >
@@ -32,6 +27,7 @@
             <th>no</th>
             <th>이름</th>
             <th>아이디</th>
+            <th></th>
         </tr>
         </thead>
         <tfoot>
@@ -41,8 +37,8 @@
             <tr th:each = "members,i :${members}">
                 <td th:text = "${members.rownum}"></td>
                 <td th:text = "${members.name}"></td>
-
                 <td th:text = "${members.loginId}"></td>
+                <td><a th:href="@{/member/{id} (id=${members.id})}"><button>상세보기</button></a></td>
             </tr>
         </div>
         </tbody>
@@ -74,7 +70,7 @@
 	<a th:href="@{'/member?currentPage='+${pn.totalPage}}" th:text="|&emsp;끝|"></a>
     </span>
     </div>
-
+    <button><a href="/member/save">신규등록</a></button>
 </div>
 <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin = "anonymous"></script>

@@ -2,26 +2,74 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.web.MemberRepository">
-    <select id="findAll" resultType="com.example.demo.domain.Member" parameterType="com.example.demo.dto.SearchDTO" >
-        select rn.* from
-        (select @rownum := @rownum+1 as rownum , m.* from member m, (select @rownum :=0) r
-        ) rn
+    <select id="findAll"  resultType="com.example.demo.entity.Member" parameterType="com.example.demo.dto.SearchDTO">
+        select rm.* from
+        (select @rownum := @rownum+1 rownum, m.* from (select @rownum :=0) rn, member m) rm
         <where>
-            <if test="loginId!=null and loginId!=''">
-                rn.loginId like concat('%',#{loginId},'%')
+            <if test="loginId!=null and loginId !=''">
+               rm.loginId like concat('%', #{loginId},'%')
             </if>
-            <if test="name!=null and name!=''">
-               and rn.name like concat('%',#{name},'%')
+            <if test="name!=null and name !=''">
+                and rm.name like concat('%', #{name},'%')
+            </if>
+            <if test="id!=null and id !=''">
+               and rm.id = #{id}
             </if>
         </where>
         limit #{pagination.recordSize}
         offset #{pagination.offset}
-       ;
     </select>
 
-    <select id="count" resultType="int">
+    <select id = "findByLoginId"   resultType="java.lang.Boolean"  parameterType="java.lang.String">
+        select if(count(*) <![CDATA[ < ]]> 1,true,false) as bol from member where loginId=#{loginId} and 1=1 and loginId is not null;
+    </select>
+    <select id = "findByMemberFromLoginId"   resultType="java.lang.Long"  parameterType="java.lang.String">
+        select id from member where loginId=#{loginId};
+    </select>
+
+    <select id = "findOne"   resultType="com.example.demo.entity.Member"  parameterType="java.lang.Long">
+       select * from member where id = #{id};
+    </select>
+
+    <insert id="memberSave" parameterType="com.example.demo.entity.dao.MemberSave" useGeneratedKeys="true" keyProperty="name,loginId">
+        insert into member(loginId,name) values(#{loginId},#{name});
+    </insert>
+
+    <select id="memberUpdate" parameterType="com.example.demo.entity.dao.MemberUpdate">
+        update member set loginId = #{loginId}, name =  #{name} where id = #{id};
+    </select>
+
+    <select id = "deleteMember" parameterType="java.lang.Long">
+        delete from member where id =  #{id};
+    </select>
+
+    <select id = "deleteFromLoginId" parameterType="java.lang.String">
+        delete from member where loginId =  #{loginId};
+    </select>
+
+    <select id = "count" resultType="int">
         select count(*) from member;
     </select>
+<!--    <select id="findAll" resultType="com.example.demo.domain.Member" parameterType="com.example.demo.dto.SearchDTO" >-->
+<!--        select rn.* from-->
+<!--        (select @rownum := @rownum+1 as rownum , m.* from member m, (select @rownum :=0) r-->
+<!--        ) rn-->
+<!--        <where>-->
+<!--            <if test="loginId!=null and loginId!=''">-->
+<!--                rn.loginId like concat('%',#{loginId},'%')-->
+<!--            </if>-->
+<!--            <if test="name!=null and name!=''">-->
+<!--               and rn.name like concat('%',#{name},'%')-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        limit #{pagination.recordSize}-->
+<!--        offset #{pagination.offset}-->
+<!--       ;-->
+<!--    </select>-->
+
+<!--    <select id="count" resultType="int">-->
+<!--        select count(*) from member;-->
+<!--    </select>-->
 
 
 

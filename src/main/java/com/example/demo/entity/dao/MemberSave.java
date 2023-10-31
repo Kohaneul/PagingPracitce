@@ -1,18 +1,19 @@
-package com.example.demo.dto;
+package com.example.demo.entity.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchDTO {
-    private String loginId;
+public class MemberSave {
+    @NotEmpty
     private String name;
-    private int id;
-    private Pagination pagination;
-
+    @NotEmpty
+    private String loginId;
 }
